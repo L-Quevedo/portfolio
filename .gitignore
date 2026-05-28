@@ -36,6 +36,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# auxiliary files not for production
+public/cv.pdf.txt
+public/logo-preview.html
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

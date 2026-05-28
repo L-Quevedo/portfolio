@@ -1,26 +1,274 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Design tokens — premium dark theme with neon accent
+   ============================================================ */
+@theme {
+  --color-bg: #07080b;
+  --color-bg-soft: #0b0d12;
+  --color-surface: #11141b;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.14);
+  --color-muted: #8b8f9a;
+  --color-fg: #e7e9ee;
+  --color-fg-strong: #ffffff;
+  --color-accent: #7cf2c8;
+  --color-accent-2: #9aa6ff;
+  --color-accent-3: #ff9ae0;
+
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Inter, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, "JetBrains Mono", Menlo,
+    Consolas, monospace;
+  --font-display: var(--font-display), var(--font-sans);
+
+  --shadow-glow: 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 30px 80px -20px rgba(124, 242, 200, 0.15);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   Base
+   ============================================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+  --background: var(--color-bg);
+  --foreground: var(--color-fg);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(124, 242, 200, 0.25);
+  color: #ffffff;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ============================================================
+   Utility patterns
+   ============================================================ */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.bg-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: -1px -1px;
+}
+
+.text-gradient {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #e7e9ee 35%,
+    var(--color-accent) 70%,
+    var(--color-accent-2) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-soft {
+  background: linear-gradient(180deg, #ffffff, #b8bcc6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.015)
+  );
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+.glass-strong {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.025)
+  );
+  border: 1px solid var(--color-border-strong);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+
+.ring-accent {
+  box-shadow: 0 0 0 1px rgba(124, 242, 200, 0.4),
+    0 10px 40px -10px rgba(124, 242, 200, 0.4);
+}
+
+/* Animated aurora gradient blob */
+@keyframes aurora-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(40px, -30px, 0) scale(1.1);
+  }
+}
+
+.aurora {
+  animation: aurora-drift 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 35s linear infinite;
+}
+
+/* ============================================================
+   Floating particles — puntos sutiles que flotan en el fondo
+   ============================================================ */
+@keyframes float-particle {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.25;
+  }
+  25% {
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(18px, -24px, 0);
+    opacity: 0.55;
+  }
+  75% {
+    opacity: 0.4;
+  }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 999px;
+  will-change: transform, opacity;
+  animation: float-particle var(--duration, 20s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ============================================================
+   Shooting stars — estrellas fugaces que cruzan la pantalla
+   ============================================================ */
+/* La estrella aparece brevemente cada ciclo (visible ~7% del tiempo total) */
+@keyframes shoot {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(var(--angle, 35deg));
+    opacity: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  6% {
+    transform: translate3d(var(--travel-x, 800px), var(--travel-y, 500px))
+      rotate(var(--angle, 35deg));
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(var(--travel-x, 800px), var(--travel-y, 500px))
+      rotate(var(--angle, 35deg));
+    opacity: 0;
+  }
+}
+
+.shooting-star {
+  position: absolute;
+  width: 160px;
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(124, 242, 200, 0.9) 50%,
+    rgba(255, 255, 255, 1) 95%,
+    transparent 100%
+  );
+  border-radius: 999px;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 0 6px rgba(124, 242, 200, 0.8));
+  opacity: 0;
+}
+
+/* Hide native cursor only on devices with fine pointer */
+@media (pointer: fine) {
+  .has-custom-cursor,
+  .has-custom-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

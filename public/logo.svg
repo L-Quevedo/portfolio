@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80" role="img" aria-label="Lucas Quevedo — Desarrollador, QA">
+  <text x="158" y="48" text-anchor="end" font-family="'Space Grotesk', sans-serif" font-size="34" font-weight="500" fill="#ffffff" letter-spacing="-1">lucas</text>
+  <circle cx="170" cy="40" r="4" fill="#7cf2c8" filter="url(#glow)"/>
+  <text x="182" y="48" text-anchor="start" font-family="'Space Grotesk', sans-serif" font-size="34" font-weight="700" fill="#ffffff" letter-spacing="-1">quevedo</text>
+  <line x1="80" y1="62" x2="320" y2="62" stroke="#ffffff" stroke-opacity="0.15" stroke-width="1"/>
+  <text x="200" y="75" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" letter-spacing="3" fill="#ffffff" fill-opacity="0.5">DESARROLLADOR, QA</text>
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>

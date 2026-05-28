@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio · Lautaro Quevedo
 
-## Getting Started
+Portfolio personal premium construido con **Next.js 16 (App Router) + TypeScript + Tailwind v4 + Framer Motion**. Diseño minimalista oscuro con acentos neon, animaciones suaves, cursor interactivo, fondo dinámico y reveal on scroll.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- [Next.js 16](https://nextjs.org) (App Router, React 19)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Lucide Icons](https://lucide.dev/)
+
+## Estructura
+
+```
+src/
+├── app/
+│   ├── globals.css        # design tokens + utilidades premium
+│   ├── layout.tsx         # metadata SEO, fuentes, root layout
+│   └── page.tsx           # composición de secciones
+├── components/
+│   ├── layout/
+│   │   ├── Navbar.tsx
+│   │   └── Footer.tsx
+│   ├── sections/
+│   │   ├── Hero.tsx
+│   │   ├── About.tsx
+│   │   ├── Skills.tsx
+│   │   ├── Stats.tsx
+│   │   ├── Projects.tsx
+│   │   ├── Experience.tsx
+│   │   ├── CV.tsx
+│   │   └── Contact.tsx
+│   └── ui/
+│       ├── AnimatedBackground.tsx
+│       ├── CustomCursor.tsx
+│       ├── MagneticButton.tsx
+│       ├── Reveal.tsx
+│       └── SectionHeading.tsx
+└── lib/
+    ├── data.ts            # contenido mock (personal, skills, proyectos, exp.)
+    └── utils.ts
+public/
+├── projects/*.svg         # previews de proyectos (reemplazables)
+└── cv.pdf                 # reemplazar por tu CV real
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Desarrollo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Abrí http://localhost:3000
 
-## Learn More
+## Build de producción
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Personalización
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Toda la información personal vive en [`src/lib/data.ts`](src/lib/data.ts):
 
-## Deploy on Vercel
+- `personal` → nombre, rol, email, redes
+- `skills` → stack con nivel, categoría y descripción
+- `projects` → proyectos del portfolio
+- `experience` → timeline laboral
+- `stats` → métricas animadas
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Los **colores y tipografía** del tema están en [`src/app/globals.css`](src/app/globals.css), bloque `@theme`. Cambiá `--color-accent`, `--color-accent-2`, `--color-accent-3` para repintar todo el sitio.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### CV
+
+Colocá tu archivo `cv.pdf` en `/public/cv.pdf`. El botón de descarga lo sirve desde ahí.
+
+### Imágenes de proyectos
+
+Los previews en `/public/projects/*.svg` son placeholders. Reemplazalos por capturas reales (PNG/JPG/WEBP de 800×500) y actualizá la ruta en `data.ts`.
+
+## Deploy en Vercel
+
+1. Subí el repo a GitHub.
+2. En [vercel.com/new](https://vercel.com/new) importá el repo.
+3. Vercel detecta Next.js automáticamente — dejá los defaults.
+4. Click en **Deploy**. Listo.
+
+Para dominio custom: Project → Settings → Domains → agregá tu dominio y apuntá el DNS.
+
+## Performance & accesibilidad
+
+- Imágenes optimizadas vía SVG vectorial.
+- `prefers-reduced-motion` respetado: animaciones se reducen automáticamente.
+- Colores con contraste AA en texto principal.
+- Estructura semántica con `<section>`, `<header>`, `<footer>`, `<main>`, `<nav>`.
+
+## Licencia
+
+MIT — usalo como base para tu propio portfolio.
