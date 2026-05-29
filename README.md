@@ -1,4 +1,4 @@
-# Portfolio · Lautaro Quevedo
+# Portfolio · Lucas Quevedo
 
 Portfolio personal premium construido con **Next.js 16 (App Router) + TypeScript + Tailwind v4 + Framer Motion**. Diseño minimalista oscuro con acentos neon, animaciones suaves, cursor interactivo, fondo dinámico y reveal on scroll.
 
