@@ -1,10 +1,10 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useRef, type ComponentPropsWithoutRef, type ReactNode } from "react";
+import { motion, useMotionValue, useSpring, type HTMLMotionProps } from "framer-motion";
+import { useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-type Props = ComponentPropsWithoutRef<"a"> & {
+type Props = Omit<HTMLMotionProps<"a">, "ref"> & {
   children: ReactNode;
   variant?: "primary" | "ghost";
   strength?: number;
